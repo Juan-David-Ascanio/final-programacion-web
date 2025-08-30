@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reservar Entradas - Cine Reservas</title>
+  <link rel="stylesheet" href="../src/css/style.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">🎬 Cine Reservas</div>
+    <nav class="nav">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="peliculas.html">Películas</a></li>
+        <li><a href="reservas.html" class="active">Reservar</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Formulario de Reservas -->
+  <section class="reserva-section">
+    <h1>🎟 Reserva tus Entradas</h1>
+    <form id="formReserva" class="reserva-form">
+      <label for="nombre">👤 Nombre completo</label>
+      <input type="text" id="nombre" required placeholder="Ej: Juan Pérez">
+
+      <label for="pelicula">🎥 Selecciona la película</label>
+      <select id="pelicula">
+        <option>Avatar 2 - 6:00 PM</option>
+        <option>Avengers: Endgame - 8:30 PM</option>
+        <option>Joker - 10:00 PM</option>
+      </select>
+
+      <label for="cantidad">🎫 Cantidad de boletos</label>
+      <input type="number" id="cantidad" min="1" max="10" required>
+
+      <button type="submit" class="btn">Confirmar Reserva</button>
+    </form>
+
+    <div id="mensaje" class="mensaje"></div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>
