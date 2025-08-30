@@ -56,13 +56,15 @@ body {
 
 /* ---------- HERO (INDEX) ---------- */
 .hero {
-    background: url("https://i.ibb.co/pRXpFQH/cinema-bg.jpg") no-repeat center center/cover;
+    background: url("") no-repeat center center/cover;
+    position: relative;
     height: 100vh;
+    background-color: #0F4C5C;
+    overflow: hidden;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 0 20px;
 }
 
 .hero::before {
