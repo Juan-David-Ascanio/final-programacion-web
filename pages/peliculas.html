@@ -2,6 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cartelera - Cine Reservas</title>
     <link rel="stylesheet" href="../src/css/style.css" />
     <link rel="icon" type="image/png" href="../src/img/favicon.png">
@@ -9,27 +10,30 @@
 
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="logo">🎬 Cine Reservas</div>
-      <nav class="nav">
-        <ul>
-          <li><a href="../index.html">Inicio</a></li>
-          <li><a href="peliculas.html" class="active">Películas</a></li>
-          <li><a href="reservas.html">Reservar</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
+     <header class="navbar">
+  <div class="nav-inner container-wide">
+    <a href="/" class="brand">
+      <img src="/src/img/logo.png" alt="Cine Reservas" class="brand-logo">
+      <span class="brand-text">Cine Reservas</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/index.html">Inicio</a>
+      <a href="/pages/peliculas.html">Películas</a>
+      <a href="/pages/reservas.html">Reservar</a>
+      <a href="/pages/contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
 
     <!-- Sección Cartelera -->
     <section class="peliculas-section">
-      <h1>🎥 Cartelera</h1>
-      <p class="subtitulo">
-        Explora los estrenos y reserva tu entrada al instante
-      </p>
+  <div class="container">
+    <h1 class="titulo-seccion">🍿 Cartelera</h1>
+    <p class="subtitulo-seccion">Explora los estrenos y reserva tu entrada al instante</p>
 
-      <div class="peliculas-grid">
-        <article class="pelicula-card">
+    <div class="peliculas-grid">
+      <article class="pelicula-card">
           <img src="/src/img/Avatar.jpeg" alt="Avatar 2" />
           <div class="pelicula-info">
             <h3>Avatar 2</h3>
@@ -84,9 +88,12 @@
             <a href="reservas.html" class="btn">🎟 Reservar</a>
           </div>
         </article>
-        
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+   
+      
 
     <footer class="footer">
       <p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>

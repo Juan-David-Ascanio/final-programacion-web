@@ -1,9 +1,18 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
+img,video{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+body {
+    margin:0;
+    line-height:1.6;
+}
+
 
 /* Fuente general */
 body {
@@ -26,10 +35,89 @@ body {
     z-index: 10;
 }
 
+
+.container-wide{
+    width: min(100% - 4rem, 1440px);
+    margin-inline: auto;
+}
+
+.navbar{
+  position: sticky;
+  top:0; z-index:1000;
+  background:#111; 
+  color:#FFD700;
+}
+
+@media (min-width:768px){
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-left: auto;  /* empuja los links a la derecha */
+  }
+}
+.brand{
+  display:flex; 
+  align-items:center; 
+  gap:.5rem;
+  text-decoration:none; 
+  color:#FFD700;
+}
+
+.brand-logo{
+    width:28px; 
+    height:auto; 
+    display:block;
+
+}
+.brand-text{
+    font-weight:800;
+    font-size:1.5rem;
+}
+
+/* links estilo */
+.nav-links{
+    display:flex; 
+    flex-direction:column; 
+    gap:.5rem; width:100%;
+}
+
+.nav-links a{
+    color:#fff;
+    text-decoration:none;
+    padding:.25rem 0;
+    }
+.nav-links a:hover{
+    color:#FFD700;
+}
+
+
+/* en pantallas ≥768px: horizontal */
+@media (min-width:768px){
+  .nav-inner{
+    flex-direction:row; 
+    align-items:center;
+  }
+
+  .nav-links{
+    flex-direction:row; 
+    gap:1rem; 
+    margin-left:auto; 
+    width:auto;
+  }
+
+}
+
 .logo {
     font-size: 1.5em;
     font-weight: bold;
     color: #f5c518;
+}
+
+.logo a.logo {
+    color: #f5c518;
+    text-decoration: none;
+    
 }
 
 .nav ul {
@@ -148,10 +236,12 @@ body {
 }
 
 /* ---------- CARTELERA (PELÍCULAS) ---------- */
+
+
 .peliculas-section {
     padding: 120px 20px 60px;
     text-align: center;
-    background: #111;
+    background: #1a1a1a;
 }
 
 .peliculas-section h1 {
@@ -160,12 +250,55 @@ body {
     color: #f5c518;
 }
 
-.peliculas-grid {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
+.peliculas-section p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    color: #eee;
 }
+
+.peliculas-grid{
+  display:grid;
+  grid-template-columns:1fr;   /* para celular */
+  gap:1rem;
+}
+
+/* para tablet */
+@media (min-width: 768px){
+  .peliculas-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+/* para escritorio */
+@media (min-width: 1024px){
+  .peliculas-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    align-items:center;
+    padding:.75rem 1rem;
+}
+.navbar .links{
+    width:100%; 
+    display:flex;
+    flex-direction:column;
+    gap:.5rem} /* para celular */
+
+
+
+@media (min-width:768px){
+  .navbar .links{
+    width:auto;
+    flex-direction:row;
+    margin-left:auto
+  }
+}
+
 
 .pelicula-card {
     background: #222;
@@ -429,3 +562,129 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ====== Contenedores ====== */
+
+.container {              
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+
+.container-wide {           /* para el header (más ancho y “pegado”) */
+  width: min(100% - 1.25rem, 1400px);
+  margin-inline: auto;
+}
+
+/* =====Header sin solapes y fluido ====== */
+.navbar { 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    background: #111; 
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding-block: .75rem;      
+  max-width: none;            
+  flex-wrap: wrap;            
+}
+
+/* logo */
+.brand { 
+    display:flex; 
+    align-items:center; 
+    gap:.5rem; color:#ffcc00; 
+    text-decoration:none; 
+}
+
+.brand-logo { 
+    width:28px; 
+    height:auto; 
+}
+
+.brand-text { 
+    font-weight:800; 
+    font-size: clamp(1rem, 1.5vw + .5rem, 1.25rem);
+     white-space: nowrap; 
+    }
+
+/* links */
+.nav-links { 
+    display:flex; 
+    gap:1rem; 
+}
+
+@media (max-width: 768px){
+  .nav-links{
+    width:100%;               /* baja a segunda línea */
+    order: 2;
+    justify-content:flex-start;
+    gap:.75rem;
+  }
+}
+
+/* ====== Títulos con tamaño responsivo ====== */
+.titulo-seccion{
+  text-align:center;
+  margin: 1.5rem 0 .25rem;
+  font-size: clamp(1.25rem, 2vw + .75rem, 2rem);
+}
+.subtitulo-seccion{
+  text-align:center;
+  margin: 0 0 1.5rem;
+  font-size: clamp(.95rem, .6vw + .8rem, 1.1rem);
+  opacity:.85;
+}
+
+/* ====== Grilla de películas realmente responsive ====== */
+.peliculas-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.pelicula-card{
+  display:flex; 
+  flex-direction:column; 
+  height:100%;
+  background:#1f1f1f; 
+  border-radius:14px; 
+  padding:1rem;
+  box-shadow: 0 2px 0 rgba(0,0,0,.25) inset, 0 6px 18px rgba(0,0,0,.25);
+}
+.pelicula-card img{
+  width:100%; 
+  aspect-ratio: 2/3; 
+  object-fit:cover; 
+  border-radius:10px; 
+  margin-bottom:.75rem;
+}
+.pelicula-info{ 
+    display:flex; 
+    flex-direction:column; 
+    gap:.5rem; 
+}
+.pelicula-info .btn{ 
+    margin-top:auto; 
+}  
+
+.pelicula-card .btn{
+    width: 140px;
+    text-align: center;
+}
+
+/* ====== Sscroll horizontal ====== */
+img, video { 
+    max-width:100%; 
+    height:auto; 
+    display:block;
+ }
+
+ body { margin:0; 
+    line-height:1.6; 
+    overflow-x:hidden; 
+}
+
