@@ -627,7 +627,7 @@ body {
   }
 }
 
-/* ====== Títulos con tamaño responsivo ====== */
+/* ====== Títulos responsive ====== */
 .titulo-seccion{
   text-align:center;
   margin: 1.5rem 0 .25rem;
@@ -640,7 +640,7 @@ body {
   opacity:.85;
 }
 
-/* ====== Grilla de películas realmente responsive ====== */
+/* ====== Peliculas responsive====== */
 .peliculas-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
