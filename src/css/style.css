@@ -56,6 +56,7 @@ body {
     margin-left: auto;  /* empuja los links a la derecha */
   }
 }
+
 .brand{
   display:flex; 
   align-items:center; 
@@ -137,7 +138,7 @@ body {
     color: #f5c518;
 }
 
-.nav a.active {
+.nav-links a.active {
     color: #f5c518;
     border-bottom: 2px solid #f5c518;
 }
