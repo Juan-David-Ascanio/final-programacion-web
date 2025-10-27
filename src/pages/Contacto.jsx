@@ -1,8 +1,9 @@
 import React from 'react'
-
+import "./../css/Contacto.css"
 
 export default function Contacto(){
 return (
+    <>
 <main className="contact-wrapper">
 <h1 className="contact-title">📞 Contacto</h1>
 
@@ -39,10 +40,11 @@ return (
 </section>
 </div>
 
-
-<footer className="footer">
-<p>&copy; 2025 Cine Reservas. Todos los derechos reservados.</p>
-</footer>
 </main>
+
+      <footer className="footer">
+        <p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
+      </footer>
+    </>
 )
 }

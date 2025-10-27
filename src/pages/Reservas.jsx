@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import "./../css/Reservas.css"
 
 export default function Reservas(){
 const [mensaje, setMensaje] = useState('')
@@ -19,6 +19,7 @@ e.target.reset()
 
 
 return (
+    <>
 <section className="reserva-section">
 <h1>🎟 Reserva tus Entradas</h1>
 <form onSubmit={handleSubmit} className="reserva-form">
@@ -41,13 +42,12 @@ return (
 <button type="submit" className="btn">Confirmar Reserva</button>
 </form>
 
-
 <div id="mensaje" className="mensaje">{mensaje}</div>
 
-
-<footer className="footer">
-<p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
-</footer>
 </section>
+      <footer className="footer">
+        <p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
+      </footer>
+    </>
 )
 }

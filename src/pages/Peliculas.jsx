@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import "./../css/Peliculas.css"
 
 const movies = [
 {title: 'Avatar 2', img: '/img/Avatar.jpeg', desc: 'Regresa a Pandora con espectaculares efectos visuales y una historia emocionante.', horario: '6:00 PM'},
@@ -8,7 +8,6 @@ const movies = [
 {title: 'Joker', img: '/img/joker.jpg', desc: 'Un retrato oscuro e intenso del origen del icónico villano de Gotham.', horario: '10:00 PM'},
 {title: 'El Conjuro: Últimos Ritos', img: '/img/conjuro.jpg', desc: 'Ed y Lorraine Warren se ven envueltos en otro aterrador caso relacionado con misteriosas criaturas.', horario: '12:00 AM'}
 ]
-
 
 export default function Peliculas(){
 return (

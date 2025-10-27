@@ -1,0 +1,84 @@
+/* ---------- CARTELERA (PELÍCULAS) ---------- */
+.peliculas-section {
+    padding: 120px 20px 60px;
+    text-align: center;
+    background: #1a1a1a;
+}
+
+.peliculas-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #f5c518;
+}
+
+.peliculas-section p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    color: #eee;
+}
+
+/* Contenedor general de las películas */
+.peliculas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* cuadrícula fija */
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+/* Tarjeta de película */
+.pelicula-card {
+    background: #1c1c1c;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 280px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.pelicula-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+}
+
+.pelicula-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Información dentro de la tarjeta */
+.pelicula-info {
+    padding: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pelicula-info h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #f5c518;
+}
+
+.pelicula-info .descripcion {
+    font-size: 0.95em;
+    margin-bottom: 12px;
+    color: #ccc;
+}
+
+.pelicula-info .horario {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.pelicula-info .btn {
+    margin-top: auto;
+    width: 140px;
+    text-align: center;
+}
