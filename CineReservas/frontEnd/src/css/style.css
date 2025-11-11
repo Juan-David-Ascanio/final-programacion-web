@@ -41,26 +41,6 @@ body {
     margin-inline: auto;
 }
 
-
-.brand{
-  display:flex; 
-  align-items:center; 
-  gap:.5rem;
-  text-decoration:none; 
-  color:#FFD700;
-}
-
-.brand-logo{
-    width:28px; 
-    height:auto; 
-    display:block;
-
-}
-.brand-text{
-    font-weight:800;
-    font-size:1.5rem;
-}
-
 .logo {
     font-size: 1.5em;
     font-weight: bold;
@@ -175,26 +155,6 @@ body {
 }
 
 .container-wide {           /* para el header (más ancho y “pegado”) */
-  width: min(100% - 1.25rem, 1400px);
+  width: min(100% - 1.25rem, 90%);
   margin-inline: auto;
-}
-
-
-/* logo */
-.brand { 
-    display:flex; 
-    align-items:center; 
-    gap:.5rem; color:#ffcc00; 
-    text-decoration:none; 
-}
-
-.brand-logo { 
-    width:28px; 
-    height:auto; 
-}
-
-.brand-text { 
-    font-weight:800; 
-    font-size: clamp(1rem, 1.5vw + .5rem, 1.25rem);
-     white-space: nowrap; 
 }

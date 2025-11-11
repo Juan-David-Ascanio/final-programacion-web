@@ -1,84 +1,149 @@
 /* ---------- CARTELERA (PELÍCULAS) ---------- */
 .peliculas-section {
-    padding: 120px 20px 60px;
-    text-align: center;
-    background: #1a1a1a;
+  padding: 120px 20px 60px;
+  text-align: center;
+  background: #1a1a1a;
 }
 
-.peliculas-section h1 {
-    font-size: 2.5em;
-    margin-bottom: 40px;
-    color: #f5c518;
+.titulo-seccion {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #f5c518;
 }
 
-.peliculas-section p {
-    font-size: 1.5em;
-    margin-bottom: 40px;
-    color: #eee;
+.subtitulo-seccion {
+  font-size: 1.2em;
+  margin-bottom: 50px;
+  color: #eee;
 }
 
-/* Contenedor general de las películas */
+/* Grid responsivo */
 .peliculas-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* cuadrícula fija */
-    gap: 1.5rem;
-    justify-items: center;
+  display: grid;
+  gap: 1.7rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 0 10px;
 }
 
-/* Tarjeta de película */
+/* Tarjeta */
 .pelicula-card {
-    background: #1c1c1c;
-    border-radius: 12px;
-    overflow: hidden;
-    width: 280px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
+  background: #1c1c1c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* clave para uniformidad */
 }
 
+/* Hover */
 .pelicula-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
 
+/* Imagen */
 .pelicula-card img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
 }
 
-/* Información dentro de la tarjeta */
+/* Info interna */
 .pelicula-info {
-    padding: 15px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  flex: 1; /* ocupar resto del espacio */
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* igual altura */
+  text-align: center; /* centrado */
 }
 
+/* Títulos */
 .pelicula-info h3 {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-    color: #f5c518;
+  font-size: 1.4em;
+  color: #f5c518;
+  margin-bottom: 10px;
 }
 
+/* Descripción */
 .pelicula-info .descripcion {
-    font-size: 0.95em;
-    margin-bottom: 12px;
-    color: #ccc;
+  font-size: 1em;
+  color: #ccc;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
+/* Horario */
 .pelicula-info .horario {
-    display: inline-block;
-    margin-bottom: 12px;
-    font-weight: bold;
-    color: #cccccc;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #d6d6d6;
 }
 
+/* Botón */
 .pelicula-info .btn {
-    margin-top: auto;
-    width: 140px;
-    text-align: center;
+  background: #f5c518;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.pelicula-info .btn:hover {
+  background: #d8a815;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .titulo-seccion {
+    font-size: 2.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .peliculas-section {
+    padding-top: 100px;
+  }
+
+  .pelicula-card img {
+    height: 320px;
+  }
+
+  .descripcion {
+    font-size: 0.95em;
+  }
+  .peliculas-grid{
+    justify-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pelicula-card img {
+    height: 270px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.8em;
+  }
+
+  .subtitulo-seccion {
+    font-size: 1em;
+  }
+    /* Centrado perfecto en móviles */
+    .peliculas-grid {
+    grid-template-columns: 1fr; /* una sola columna */
+    justify-items: center;      /* centra cada card */
+  }
+    .pelicula-card {
+    width: 85%;                 /* más proporcionadas */
+    max-width: 320px;           /* no demasiado grandes */
+  }
 }

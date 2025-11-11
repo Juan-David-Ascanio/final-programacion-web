@@ -10,6 +10,7 @@ import SeatSelection from "./pages/SeatSelection";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/peliculas" element={<Peliculas />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* 🔒 Páginas protegidas */}
         <Route

@@ -1,19 +1,23 @@
-// src/components/auth.js
-const USERS = [
-  { username: "admin", password: "123456", role: "admin" },
-  { username: "user", password: "123456", role: "user" },
-];
-
 const STORAGE_KEY = "cine_user";
 
 export const auth = {
-  login(username, password) {
-    const user = USERS.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (!user) return false;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-    return true;
+  async login(correo, contrasena) {
+    try {
+      const response = await fetch("http://localhost:3001/api/usuarios/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo, contrasena }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) return { ok: false, error: data.error };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data.user));
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: "Error de conexión con el servidor" };
+    }
   },
 
   logout() {
@@ -25,11 +29,7 @@ export const auth = {
   },
 
   getUser() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
   },
 };

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../components/auth";
 import "./../css/Header.css";
+import { FaUser } from "react-icons/fa"; //Importa el ícono que va junto a "Mi cuenta" se instala con npm install react-icons
+
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,14 +44,15 @@ export default function Header() {
 
           {isLogged ? (
             <>
-              {user.role === "admin" && (
-                <NavLink to="/dashboard" onClick={closeMenu}>
-                  Mi Cuenta
-                </NavLink>
-              )}
+              <NavLink to="/dashboard" onClick={closeMenu}>
+              <FaUser /> Mi Cuenta
+              </NavLink>
             </>
           ) : (
-            <NavLink to="/login" onClick={closeMenu}>Login</NavLink>
+            <>
+              <NavLink to="/login" onClick={closeMenu}>Login</NavLink>
+              <NavLink to="/register" onClick={closeMenu}>Crear cuenta</NavLink>
+            </>
           )}
         </nav>
       </div>

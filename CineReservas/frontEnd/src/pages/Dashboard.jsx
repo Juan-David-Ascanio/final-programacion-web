@@ -16,12 +16,21 @@ export default function Dashboard() {
     <section className="dashboard-container">
       <div className="dashboard-card">
         <h1>Panel de Control</h1>
-        <p>Bienvenido, <b>{user.username}</b>.</p>
-        <p>Rol: <span className="user-role">{user.role}</span></p>
+
+        <p>
+          Bienvenido, <b>{user.nombre}</b>.
+        </p>
+
+        <p>
+          Rol: <span className="user-role">{user.rol}</span>
+        </p>
 
         <button
           className="logout-btn"
-          onClick={() => { auth.logout(); navigate("/"); }}
+          onClick={() => {
+            auth.logout();
+            navigate("/");
+          }}
         >
           Cerrar sesión
         </button>

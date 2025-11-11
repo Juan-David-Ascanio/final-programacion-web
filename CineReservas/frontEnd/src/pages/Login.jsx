@@ -1,38 +1,59 @@
-// src/pages/Login.jsx
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../components/auth";
-import "./../css/Login.css";
+import "../css/Login.css";
 
 export default function Login() {
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const onSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password } = e.target.elements;
-    if (auth.login(username.value, password.value)) {
-      navigate("/");
-    } else {
-      alert("Usuario o contraseña incorrectos");
+
+    const result = await auth.login(correo, contrasena);
+
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+
+    navigate("/dashboard");
   };
 
   return (
-    <section className="login-container">
-      <div className="login-box">
-        <h1>Iniciar Sesión</h1>
-        <form onSubmit={onSubmit}>
-          <label>
-            Usuario
-            <input name="username" type="text" placeholder="admin" required />
-          </label>
-          <label>
-            Contraseña
-            <input name="password" type="password" placeholder="123456" required />
-          </label>
-          <button type="submit" className="login-btn">Entrar</button>
-        </form>
-        <p className="demo">Demo: <code>admin / 123456</code></p>
-      </div>
-    </section>
+    <div className="login-container">
+      <form className="login-card" onSubmit={handleSubmit}>
+        <h2>Iniciar sesión</h2>
+
+        {error && <p className="error-msg">{error}</p>}
+
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={contrasena}
+          onChange={(e) => setContrasena(e.target.value)}
+          required
+        />
+
+        <button type="submit">Entrar</button>
+
+        <p className="register-link">
+          ¿No tienes cuenta aún? 
+          <a href="/register">Crear cuenta</a>
+        </p>
+
+
+      </form>
+    </div>
   );
 }

@@ -13,8 +13,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 60px;
-  max-width: 1400px;
+  padding: 30px 60px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -25,8 +25,6 @@
   gap: 8px;
   text-decoration: none;
   color: #f5c518;  /* Dorado */
-  font-weight: 600;
-  font-size: 1.2em;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.5px;
 }
@@ -35,6 +33,17 @@
   width: 35px;
   height: 35px;
   object-fit: contain;
+}
+
+.brand-logo{
+    width:37px; 
+    height:auto; 
+    display:block;
+
+}
+.brand-text{
+    font-weight:800;
+    font-size: 25px;
 }
 
 /* ---------- LINKS ---------- */
@@ -50,6 +59,7 @@
   transition: color 0.3s, border-color 0.3s;
   position: relative;
   padding-bottom: 5px;
+  font-size: 18px;
 }
 
 /* Línea dorada inferior al estar activo o hover */
@@ -87,7 +97,7 @@
 }
 
 /* ---------- MENÚ RESPONSIVO ---------- */
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
   .nav-inner {
     padding: 15px 25px;
   }
@@ -119,5 +129,15 @@
   /* Ocultar completamente cuando está cerrado */
   .nav-links:not(.open) {
     display: none;
+  }
+  .brand-logo{
+    width:25px; 
+    height:auto; 
+    display:block;
+
+  }
+  .brand-text{
+    font-weight:800;
+    font-size: 1.2em;
   }
 }

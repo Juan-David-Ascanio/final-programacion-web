@@ -1,0 +1,117 @@
+/* ===== CONTENEDOR GENERAL ===== */
+.register-container {
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    color: #eee;
+}
+
+/* ===== TARJETA DE REGISTRO ===== */
+.register-card {
+    background: #222;
+    padding: 45px 40px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    animation: fadeIn 0.7s ease;
+}
+
+/* ===== TÍTULO ===== */
+.register-card h1 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    color: #f5c518;
+    letter-spacing: 0.5px;
+}
+
+/* ===== FORMULARIO ===== */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.register-form input {
+    padding: 12px 15px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    background: #2a2a2a;
+    color: #eee;
+    font-size: 1em;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.register-form input:focus {
+    border-color: #f5c518;
+}
+
+/* ===== BOTÓN ===== */
+.register-btn {
+    background-color: #f5c518;
+    color: #000;
+    border: none;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.register-btn:hover {
+    background-color: #e0b517;
+    transform: translateY(-2px);
+}
+
+/* ===== ENLACE DE LOGIN ===== */
+.login-link {
+    margin-top: 15px;
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.login-link a {
+    color: #f5c518;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ANIMACIÓN ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== MENSAJES ===== */
+.message-box {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 0.95em;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Mensaje de éxito */
+.success-msg {
+    background: rgba(76, 175, 80, 0.15);
+    color: #8de48f;
+    border: 1px solid rgba(76, 175, 80, 0.35);
+}
+
+/* Mensaje de error */
+.error-msg {
+    background: rgba(255, 99, 71, 0.12);
+    color: #ff7d7d;
+    border: 1px solid rgba(255, 99, 71, 0.35);
+}

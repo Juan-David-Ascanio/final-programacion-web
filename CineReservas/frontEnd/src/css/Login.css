@@ -1,114 +1,82 @@
-/* ===== LOGIN GENERAL ===== */
 .login-container {
-    background: #1a1a1a;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px;
-    color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #111;
+  animation: fadeIn 0.7s ease;
 }
 
-/* ===== TARJETA PRINCIPAL ===== */
-.login-box {
-    background: #222;
-    padding: 40px 35px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    animation: fadeIn 0.6s ease;
+/* Aumentamos tamaño y espaciamiento */
+.login-card {
+  background: #1e1e1e;
+  padding: 40px 35px;
+  border-radius: 12px;
+  width: 380px; /* antes 320px */
+  text-align: center;
 }
 
-/* ===== TÍTULO ===== */
-.login-box h1 {
-    color: #f5c518;
-    font-size: 2em;
-    margin-bottom: 25px;
-    letter-spacing: 0.5px;
+/* Título más grande */
+.login-card h2 {
+  margin-bottom: 25px;
+  color: #f5c518;
+  font-size: 1.9rem;
 }
 
-/* ===== FORMULARIO ===== */
-.login-box form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: left;
+/* Inputs más grandes y visibles */
+.login-card input {
+  width: 100%;
+  padding: 14px; /* antes 10px */
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: #eee;
+  font-size: 1.05rem; /* aumentamos tamaño */
 }
 
-.login-box label {
-    font-weight: bold;
-    font-size: 0.95em;
-    color: #ddd;
+.login-card input::placeholder {
+  color: #aaa;
 }
 
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: none;
-    border-radius: 8px;
-    background: #333;
-    color: #fff;
-    font-size: 1em;
-    outline: none;
-    transition: background 0.2s, transform 0.1s;
+/* Botón más grande y atractivo */
+.login-card button {
+  width: 100%;
+  padding: 14px;
+  background: #f5c518;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem; /* más grande */
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-.login-box input:focus {
-    background: #3a3a3a;
-    transform: scale(1.01);
+.login-card button:hover {
+  background: #e3b915;
 }
 
-/* ===== BOTÓN ===== */
-.login-btn {
-    width: 100%;
-    background-color: #f5c518;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 1em;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+/* Mensaje de error */
+.error-msg {
+  color: #ff6363;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
 }
 
-.login-btn:hover {
-    background-color: #e0b517;
-    transform: translateY(-2px);
+/* Texto inferior */
+.register-link {
+  margin-top: 18px;
+  color: #ccc;
+  font-size: 1rem;
 }
 
-/* ===== DEMO TEXTO ===== */
-.demo {
-    margin-top: 15px;
-    font-size: 0.85em;
-    color: #ccc;
-    opacity: 0.8;
+.register-link a {
+  color: #f5c518;
+  margin-left: 4px;
+  text-decoration: none;
 }
 
-.demo code {
-    background: #333;
-    color: #f5c518;
-    padding: 3px 6px;
-    border-radius: 4px;
-}
-
-/* ===== ANIMACIÓN ===== */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 480px) {
-    .login-box {
-        padding: 30px 25px;
-    }
-
-    .login-box h1 {
-        font-size: 1.6em;
-    }
+.register-link a:hover {
+  text-decoration: underline;
 }
