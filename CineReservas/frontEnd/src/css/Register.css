@@ -115,3 +115,29 @@
     color: #ff7d7d;
     border: 1px solid rgba(255, 99, 71, 0.35);
 }
+
+/* ===== CAMPO DE CONTRASEÑA CON OJO ===== */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 40px; /* espacio para el ícono */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.toggle-password:hover {
+  color: #f5c518;
+}

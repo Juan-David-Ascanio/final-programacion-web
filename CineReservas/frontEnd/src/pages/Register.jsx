@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react"; // 👈 usamos estos íconos se instala con npm install lucide-react
 import "./../css/Register.css";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false); // 👈 estado del ojo
 
   const [form, setForm] = useState({
     nombre: "",
@@ -27,14 +29,12 @@ export default function Register() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{7,15}$/;
 
-    // Validación de email
     if (!emailRegex.test(form.correo)) {
       setMessage("❌ Ingresa un correo electrónico válido.");
       setMessageType("error");
       return;
     }
 
-    // Validación de teléfono
     if (form.telefono && !phoneRegex.test(form.telefono)) {
       setMessage("❌ El teléfono debe contener solo números y tener entre 7 y 15 dígitos.");
       setMessageType("error");
@@ -93,14 +93,27 @@ export default function Register() {
             onChange={handleChange}
             required
           />
-          <input
-            type="password"
-            name="contrasena"
-            placeholder="Contraseña"
-            value={form.contrasena}
-            onChange={handleChange}
-            required
-          />
+
+          {/* === CAMPO DE CONTRASEÑA CON OJO === */}
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="contrasena"
+              placeholder="Contraseña"
+              value={form.contrasena}
+              onChange={handleChange}
+              required
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label="Mostrar u ocultar contraseña"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
+
           <input
             type="tel"
             name="telefono"
