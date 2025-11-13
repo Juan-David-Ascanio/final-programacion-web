@@ -69,7 +69,7 @@ export const loginUser = (req, res) => {
 
     const user = results[0];
 
-    // Comparación directa. Te recomiendo luego usar bcrypt.
+    // Comparación de contraseñas
     if (user.contrasena !== contrasena) {
       return res.status(401).json({ error: "Contraseña incorrecta" });
     }
@@ -91,10 +91,10 @@ export const forgotPassword = (req, res) => {
 
   if (!correo) return res.status(400).json({ error: "Correo requerido" });
 
-  // Generar PIN aleatorio
+  // Generar PIN
   const pin = Math.floor(100000 + Math.random() * 900000);
 
-  // Guardar PIN y expiración (10 minutos)
+  // Guardar PIN
   const query = `
     UPDATE usuario 
     SET reset_pin = ?, reset_expiration = DATE_ADD(NOW(), INTERVAL 10 MINUTE) 
@@ -123,10 +123,10 @@ export const forgotPassword = (req, res) => {
         text: `Tu código de recuperación es: ${pin}. Este código expirará en 10 minutos.`,
       });
 
-      console.log(`📩 PIN enviado correctamente a ${correo}`);
+      console.log(`PIN enviado correctamente a ${correo}`);
       res.json({ message: "PIN enviado al correo registrado" });
     } catch (error) {
-      console.error("❌ Error al enviar el correo:", error);
+      console.error("Error al enviar el correo:", error);
       res.status(500).json({ error: "Error al enviar el correo" });
     }
   });
@@ -147,7 +147,7 @@ export const verifyPin = (req, res) => {
 
     const user = results[0];
 
-    // Verificar PIN y tiempo de expiración
+    // Verificar  el PIN y tiempo de expiración
     const now = new Date();
     const expiration = new Date(user.reset_expiration);
 
@@ -188,7 +188,7 @@ export const resetPassword = (req, res) => {
       return res.status(400).json({ error: "PIN expirado, solicita uno nuevo" });
     }
 
-    // Si todo está bien, actualiza la contraseña
+    // Actualiza la contraseña
     const updateQuery = `
       UPDATE usuario 
       SET contrasena = ?, reset_pin = NULL, reset_expiration = NULL 

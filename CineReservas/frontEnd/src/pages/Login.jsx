@@ -51,6 +51,10 @@ export default function Login() {
           ¿No tienes cuenta aún? 
           <a href="/register">Crear cuenta</a>
         </p>
+        <p className="register-link">
+        ¿Olvidaste tu contraseña?{" "}
+         <a href="/forgot-password">Recupérala aquí</a>
+        </p>
 
 
       </form>
