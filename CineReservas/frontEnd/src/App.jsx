@@ -11,6 +11,11 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import VerifyPin from "./pages/VerifyPin";
+import ResetPassword from "./pages/ResetPassword";
+
+
 
 export default function App() {
   return (
@@ -45,9 +50,15 @@ export default function App() {
 
         {/* Opcional: solo admin */}
         <Route path="/dashboard" element={<Dashboard />} />
-
         {/* Ruta por defecto */}
         <Route path="*" element={<Home />} />
+        {/* Ruta para recuperar contraseña */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        {/* Ruta para verificar pin */}
+        <Route path="/verify-pin" element={<VerifyPin />} />
+        {/* Ruta para restablecer contraseña */}
+        <Route path="/reset-password" element={<ResetPassword />} />
+
       </Routes>
     </div>
   );
