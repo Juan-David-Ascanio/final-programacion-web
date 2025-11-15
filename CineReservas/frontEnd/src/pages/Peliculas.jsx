@@ -1,42 +1,75 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import "./../css/Peliculas.css"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./../css/Peliculas.css";
 
-const movies = [
-{title: 'Avatar 2', img: '/img/Avatar.jpeg', desc: 'Regresa a Pandora con espectaculares efectos visuales y una historia emocionante.', horario: '6:00 PM'},
-{title: 'Avengers: Endgame', img: '/img/endgame.jpg', desc: 'Los Vengadores se enfrentan a Thanos en la batalla final por el destino del universo.', horario: '8:30 PM'},
-{title: 'Joker', img: '/img/joker.jpg', desc: 'Un retrato oscuro e intenso del origen del icónico villano de Gotham.', horario: '10:00 PM'},
-{title: 'El Conjuro: Últimos Ritos', img: '/img/conjuro.jpg', desc: 'Ed y Lorraine Warren se ven envueltos en otro aterrador caso relacionado con misteriosas criaturas.', horario: '12:00 AM'}
-]
+export default function Peliculas() {
+  const [peliculas, setPeliculas] = useState([]);
 
-export default function Peliculas(){
-return (
-<>
-<section className="peliculas-section">
-<div className="container">
-<h1 className="titulo-seccion">🍿 Cartelera</h1>
-<p className="subtitulo-seccion">Explora los estrenos y reserva tu entrada al instante</p>
+  useEffect(() => {
+    fetch("http://localhost:3001/api/peliculas")
+      .then(res => res.json())
+      .then(data => setPeliculas(data))
+      .catch(err => console.error("Error cargando películas", err));
+  }, []);
 
+  // Configuración del carrusel (responsive)
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2800,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: { slidesToShow: 3 }
+      },
+      {
+        breakpoint: 900,
+        settings: { slidesToShow: 2 }
+      },
+      {
+        breakpoint: 600,
+        settings: { slidesToShow: 1 }
+      }
+    ]
+  };
 
-<div className="peliculas-grid">
-{movies.map((m, i) => (
-<article className="pelicula-card" key={i}>
-<img src={m.img} alt={m.title} />
-<div className="pelicula-info">
-<h3>{m.title}</h3>
-<p className="descripcion">{m.desc}</p>
-<span className="horario">⏰ {m.horario}</span>
-<Link to="/reservas" className="btn">🎟 Reservar</Link>
-</div>
-</article>
-))}
-</div>
-</div>
-</section>
+  return (
+    <>
+      <section className="peliculas-section">
+        <div className="container">
+          <h1 className="titulo-seccion">🍿 Cartelera</h1>
+          <p className="subtitulo-seccion">
+            Explora los estrenos y reserva tu entrada al instante
+          </p>
 
-<footer className="footer">
-<p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
-</footer>
-</>
-)
+          <Slider {...settings} className="peliculas-carousel">
+            {peliculas.map((m) => (
+              <article className="pelicula-card" key={m.id_pelicula}>
+                <img src={m.img} alt={m.titulo} />
+                <div className="pelicula-info">
+                  <h3>{m.titulo}</h3>
+                  <p className="descripcion">{m.sinopsis}</p>
+                  <span className="horario">⏰ {m.horario || "Consultar"}</span>
+                  <Link to="/reservas" className="btn">
+                    🎟 Reservar
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </Slider>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <p>&copy; 2025 Cine Reservas | Todos los derechos reservados.</p>
+      </footer>
+    </>
+  );
 }

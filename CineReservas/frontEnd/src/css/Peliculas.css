@@ -147,3 +147,94 @@
     max-width: 320px;           /* no demasiado grandes */
   }
 }
+
+/* Ajuste para que slick no desordene el diseño */
+.peliculas-carousel .pelicula-card {
+  margin: 0 10px;
+}
+
+/* Centrar dots */
+.slick-dots li button:before {
+  color: #f5c518 !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #f5c518 !important;
+  font-size: 28px;
+}
+
+/* Tarjeta */
+.pelicula-card {
+  background: #1c1c1c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 750px; /* ← ALTURA IGUAL PARA TODAS */
+}
+
+/* Imagen siempre misma altura */
+.pelicula-card img {
+  width: 100%;
+  height: 400px; /* ← AJUSTADO PARA MEJOR PROPORCIÓN */
+  object-fit: cover;
+}
+
+/* Info interna con distribución uniforme */
+.pelicula-info {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+/* Título con límite */
+.pelicula-info h3 {
+  font-size: 1.3em;
+  color: #f5c518;
+  margin-bottom: 10px;
+  min-height: 48px;      /* ← para títulos más largos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sinopsis limitada a 3 líneas */
+.pelicula-info .descripcion {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-bottom: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* ← limite de líneas */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 60px;        /* ← asegura uniformidad */
+}
+
+/* Horario igual altura */
+.pelicula-info .horario {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #d6d6d6;
+  min-height: 22px;  /* ← asegura uniformidad */
+}
+
+/* Botón perfectamente alineado al final */
+.pelicula-info .btn {
+  background: #f5c518;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
