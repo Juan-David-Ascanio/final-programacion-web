@@ -24,7 +24,6 @@ export default function Reservas() {
     const user = JSON.parse(localStorage.getItem("cine_user"));
     const id_usuario = user ? user.id_usuario : null;
 
-
     const reservaData = {
       id_usuario,
       id_funcion,
@@ -46,6 +45,7 @@ export default function Reservas() {
       }
 
       setMensaje(`✔️ Reserva confirmada para ${nombre} — ${cantidad} boleto(s).`);
+
       e.target.reset();
     } catch (error) {
       console.error("Error reservando:", error);
@@ -61,14 +61,20 @@ export default function Reservas() {
         <form onSubmit={handleSubmit} className="reserva-form">
 
           <label>👤 Nombre completo</label>
-          <input name="nombre" type="text" required placeholder="Ej: Juan Pérez" />
+          <input
+            name="nombre"
+            type="text"
+            required
+            placeholder="Ej: Juan Pérez"
+          />
 
           <label>🎥 Selecciona la función</label>
           <select name="pelicula" required>
             <option value="">Seleccione una función</option>
-            {funciones.map(f => (
+            {funciones.map((f) => (
               <option key={f.id_funcion} value={f.id_funcion}>
-                {f.titulo} — {new Date(f.fecha).toLocaleDateString("es-CO")} — {f.hora}
+                {f.titulo} —{" "}
+                {new Date(f.fecha).toLocaleDateString("es-CO")} — {f.hora}
               </option>
             ))}
           </select>
@@ -76,11 +82,13 @@ export default function Reservas() {
           <label>🎫 Cantidad de boletos</label>
           <input name="cantidad" type="number" min="1" max="10" required />
 
-          <button className="btn" type="submit">Confirmar Reserva</button>
+          <button className="btn" type="submit">
+            Confirmar Reserva
+          </button>
         </form>
 
         <div className="mensaje">{mensaje}</div>
       </section>
     </>
-  );  
+  );
 }
