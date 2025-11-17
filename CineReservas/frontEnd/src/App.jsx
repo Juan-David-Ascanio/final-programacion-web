@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyPin from "./pages/VerifyPin";
 import ResetPassword from "./pages/ResetPassword";
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 
@@ -47,6 +48,15 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+  path="/admin"
+  element={
+    <ProtectedRoute>
+      <AdminDashboard />
+    </ProtectedRoute>
+  }
+/>
 
         {/* Opcional: solo admin */}
         <Route path="/dashboard" element={<Dashboard />} />
