@@ -1,0 +1,160 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+img,video{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+body {
+    margin:0;
+    line-height:1.6;
+}
+
+
+/* Fuente general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #eee;
+    line-height: 1.6;
+}
+
+/* ---------- HEADER ---------- */
+.header {
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+
+.container-wide{
+    width: min(100% - 4rem, 1440px);
+    margin-inline: auto;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f5c518;
+}
+
+.logo a.logo {
+    color: #f5c518;
+    text-decoration: none;
+    
+}
+
+
+.pelicula-card {
+    background: #222;
+    border-radius: 10px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.pelicula-card:hover {
+    transform: scale(1.05);
+}
+
+.pelicula-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pelicula-card h3 {
+    color: #f5c518;
+    margin-bottom: 5px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #000;
+    margin-top: 40px;
+}
+
+.subtitulo {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #bbb;
+}
+
+/* Formulario */
+.contact-form {
+    background: #333;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.contact-form h2 {
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #444;
+    color: #fff;
+    resize: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid #ffcc00;
+}
+
+.contact-form button {
+    margin-top: 20px;
+    padding: 12px;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.contact-form button:hover {
+    background: #e6b800;
+}
+
+
+/* ====== Contenedores ====== */
+.container {              
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+
+.container-wide {           /* para el header (más ancho y “pegado”) */
+  width: min(100% - 1.25rem, 90%);
+  margin-inline: auto;
+}

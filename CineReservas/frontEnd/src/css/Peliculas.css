@@ -1,0 +1,240 @@
+/* ---------- CARTELERA (PELÍCULAS) ---------- */
+.peliculas-section {
+  padding: 120px 20px 60px;
+  text-align: center;
+  background: #1a1a1a;
+}
+
+.titulo-seccion {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #f5c518;
+}
+
+.subtitulo-seccion {
+  font-size: 1.2em;
+  margin-bottom: 50px;
+  color: #eee;
+}
+
+/* Grid responsivo */
+.peliculas-grid {
+  display: grid;
+  gap: 1.7rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 0 10px;
+}
+
+/* Tarjeta */
+.pelicula-card {
+  background: #1c1c1c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* clave para uniformidad */
+}
+
+/* Hover */
+.pelicula-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Imagen */
+.pelicula-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+/* Info interna */
+.pelicula-info {
+  flex: 1; /* ocupar resto del espacio */
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* igual altura */
+  text-align: center; /* centrado */
+}
+
+/* Títulos */
+.pelicula-info h3 {
+  font-size: 1.4em;
+  color: #f5c518;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.pelicula-info .descripcion {
+  font-size: 1em;
+  color: #ccc;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+/* Horario */
+.pelicula-info .horario {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #d6d6d6;
+}
+
+/* Botón */
+.pelicula-info .btn {
+  background: #f5c518;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.pelicula-info .btn:hover {
+  background: #d8a815;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .titulo-seccion {
+    font-size: 2.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .peliculas-section {
+    padding-top: 100px;
+  }
+
+  .pelicula-card img {
+    height: 320px;
+  }
+
+  .descripcion {
+    font-size: 0.95em;
+  }
+  .peliculas-grid{
+    justify-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pelicula-card img {
+    height: 270px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.8em;
+  }
+
+  .subtitulo-seccion {
+    font-size: 1em;
+  }
+    /* Centrado perfecto en móviles */
+    .peliculas-grid {
+    grid-template-columns: 1fr; /* una sola columna */
+    justify-items: center;      /* centra cada card */
+  }
+    .pelicula-card {
+    width: 85%;                 /* más proporcionadas */
+    max-width: 320px;           /* no demasiado grandes */
+  }
+}
+
+/* Ajuste para que slick no desordene el diseño */
+.peliculas-carousel .pelicula-card {
+  margin: 0 10px;
+}
+
+/* Centrar dots */
+.slick-dots li button:before {
+  color: #f5c518 !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #f5c518 !important;
+  font-size: 28px;
+}
+
+/* Tarjeta */
+.pelicula-card {
+  background: #1c1c1c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 750px; /* ← ALTURA IGUAL PARA TODAS */
+}
+
+/* Imagen siempre misma altura */
+.pelicula-card img {
+  width: 100%;
+  height: 400px; /* ← AJUSTADO PARA MEJOR PROPORCIÓN */
+  object-fit: cover;
+}
+
+/* Info interna con distribución uniforme */
+.pelicula-info {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+/* Título con límite */
+.pelicula-info h3 {
+  font-size: 1.3em;
+  color: #f5c518;
+  margin-bottom: 10px;
+  min-height: 48px;      /* ← para títulos más largos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sinopsis limitada a 3 líneas */
+.pelicula-info .descripcion {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-bottom: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* ← limite de líneas */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 60px;        /* ← asegura uniformidad */
+}
+
+/* Horario igual altura */
+.pelicula-info .horario {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #d6d6d6;
+  min-height: 22px;  /* ← asegura uniformidad */
+}
+
+/* Botón perfectamente alineado al final */
+.pelicula-info .btn {
+  background: #f5c518;
+  color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}

@@ -1,0 +1,114 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #111;
+  animation: fadeIn 0.7s ease;
+}
+
+/* Aumentamos tamaño y espaciamiento */
+.login-card {
+  background: #1e1e1e;
+  padding: 40px 35px;
+  border-radius: 12px;
+  width: 380px; /* antes 320px */
+  text-align: center;
+}
+
+/* Título más grande */
+.login-card h2 {
+  margin-bottom: 25px;
+  color: #f5c518;
+  font-size: 1.9rem;
+}
+
+/* Inputs más grandes y visibles */
+.login-card input {
+  width: 100%;
+  padding: 14px; /* antes 10px */
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: #eee;
+  font-size: 1.05rem; /* aumentamos tamaño */
+}
+
+.login-card input::placeholder {
+  color: #aaa;
+}
+
+/* Botón más grande y atractivo */
+.login-card button {
+  width: 100%;
+  padding: 14px;
+  background: #f5c518;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem; /* más grande */
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-card button:hover {
+  background: #e3b915;
+}
+
+/* Mensaje de error */
+.error-msg {
+  color: #ff6363;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+/* Texto inferior */
+.register-link {
+  margin-top: 18px;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.register-link a {
+  color: #f5c518;
+  margin-left: 4px;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Contenedor para la contraseña y el ícono */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Input igual que los demás */
+.password-container input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: #eee;
+  font-size: 1.05rem;
+}
+
+/* Ícono de ojo */
+.eye-icon {
+  position: absolute;
+  right: 14px;
+  top: 40%;
+  transform: translateY(-50%);
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.eye-icon:hover {
+  color: #f5c518;
+}

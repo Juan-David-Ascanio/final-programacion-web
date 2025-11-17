@@ -1,0 +1,216 @@
+body {
+  padding-top: 60px;
+}
+
+.seat-selection-container {
+  text-align: center;
+  background-color: #0e0e0e;
+  color: #fff;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Pantalla ---------- */
+.screen {
+  background: linear-gradient(to right, #999, #ccc);
+  color: #000;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin: 0 auto 2rem;
+  width: 60%;
+}
+
+/* ---------- Asientos ---------- */
+.seats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.row-label {
+  width: 20px;
+  text-align: right;
+  margin-right: 6px;
+  font-weight: bold;
+  color: white;
+}
+
+.seat {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.seat:hover {
+  transform: scale(1.1);
+}
+
+/* Estados de los asientos */
+.available {
+  background-color: #3cb371; /* verde suave */
+}
+
+.selected {
+  background-color: #1e90ff; /* azul */
+}
+
+.occupied {
+  background-color: #555; /* gris oscuro */
+  cursor: not-allowed;
+}
+
+/* ---------- Leyenda ---------- */
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.selected-info {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* ---------- Números de columna ---------- */
+.column-numbers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.column-number {
+  width: 25px;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* ========== 🔹 RESPONSIVE DESIGN 🔹 ========== */
+
+/* Tablets medianas (pantallas ≤ 1024px) */
+@media (max-width: 1024px) {
+  .screen {
+    width: 80%;
+    font-size: 1rem;
+  }
+
+  .seat {
+    width: 22px;
+    height: 22px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .selected-info {
+    font-size: 1rem;
+  }
+}
+
+/* Móviles grandes (pantallas ≤ 768px) */
+@media (max-width: 768px) {
+  .seat-selection-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .screen {
+    width: 90%;
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+
+  .column-numbers {
+    gap: 4px;
+  }
+
+  .column-number {
+    font-size: 0.85rem;
+    width: 20px;
+  }
+
+  .seat-row {
+    gap: 4px;
+  }
+
+  .seat {
+    width: 20px;
+    height: 20px;
+  }
+
+  .row-label {
+    font-size: 0.9rem;
+    width: 15px;
+  }
+
+  .legend {
+    gap: 1rem;
+  }
+
+  .legend div {
+    font-size: 0.8rem;
+  }
+}
+
+/* Móviles pequeños (pantallas ≤ 480px) */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .screen {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .seat {
+    width: 18px;
+    height: 18px;
+  }
+
+  .column-number {
+    font-size: 0.75rem;
+    width: 18px;
+  }
+
+  .row-label {
+    font-size: 0.8rem;
+  }
+
+  .selected-info {
+    font-size: 0.9rem;
+  }
+
+  .legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+}

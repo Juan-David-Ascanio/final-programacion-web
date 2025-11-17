@@ -1,0 +1,163 @@
+/* ---------- HERO (INDEX) ---------- */
+.hero {
+  background: url("../img/Fondo.jpg") no-repeat center center/cover;
+  position: relative;
+  height: 100vh;
+  background-color: #0F4C5C;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 0 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 15px;
+  color: #f5c518;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin-bottom: 25px;
+  color: #f1f1f1;
+}
+
+/* Botones principales */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: #f5c518;
+  color: #111;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #d4aa12;
+}
+
+.btn-secondary {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #1e7e34;
+}
+
+/* ---------- FEATURES (INDEX) ---------- */
+.features {
+  padding: 60px 20px;
+  text-align: center;
+  background: #1a1a1a;
+}
+
+.features h2 {
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  margin-bottom: 40px;
+  color: #f5c518;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between; /* distribuye el espacio uniformemente */
+    align-items: stretch; /* asegura que todas las cards tengan la misma altura */
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    flex: 1 1 300px; /* ocupa el espacio disponible, mínimo 300px */
+    background: #222;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #f5c518;
+}
+
+.card p {
+  color: white;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+/* Tablets: dos columnas en las tarjetas */
+@media (min-width: 600px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Escritorio: tres columnas */
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Reducir altura del hero en pantallas pequeñas */
+@media (max-height: 500px) {
+  .hero {
+    height: 80vh;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+    .cards {
+        justify-content: center;
+        gap: 20px;
+    }
+    .card {
+        flex: 1 1 45%;
+    }
+}
+
+@media (max-width: 600px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+    }
+}
