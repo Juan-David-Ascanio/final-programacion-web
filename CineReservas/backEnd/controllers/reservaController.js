@@ -1,7 +1,8 @@
 import db from "../db/connection.js";
 
 export const crearReserva = (req, res) => {
-  const {id_usuario, id_funcion, cantidad } = req.body;
+  console.log("📩 LLEGÓ UNA RESERVA:", req.body);
+  const { id_usuario, id_funcion, cantidad } = req.body;
 
   if (!id_funcion || !cantidad) {
     return res.status(400).json({ error: "Datos incompletos." });
@@ -9,13 +10,16 @@ export const crearReserva = (req, res) => {
 
   // Verifica asientos disponibles
   const sqlCheck = `
-    SELECT asientos_disponibles, precio
+    SELECT asientos_disponibles, precio, id_sala
     FROM funcion
     WHERE id_funcion = ?
   `;
 
   db.query(sqlCheck, [id_funcion], (err, results) => {
-    if (err) return res.status(500).json({ error: "Error en la BD." });
+    if (err) {
+      console.error("❌ ERROR EN sqlCheck:", err.sqlMessage);
+      return res.status(500).json({ error: err.sqlMessage });
+    }
 
     if (results.length === 0) {
       return res.status(404).json({ error: "Función no encontrada." });
@@ -23,6 +27,7 @@ export const crearReserva = (req, res) => {
 
     const disponibles = results[0].asientos_disponibles;
     const precio = results[0].precio;
+    const id_sala = results[0].id_sala;
 
     if (disponibles < cantidad) {
       return res.status(400).json({ error: "No hay suficientes asientos disponibles." });
@@ -31,14 +36,19 @@ export const crearReserva = (req, res) => {
     const total = precio * cantidad;
 
     const sqlReserva = `
-      INSERT INTO reserva (id_usuario, id_funcion, fecha_reserva, total, estado)
-      VALUES (?, ?, NOW(), ?, 'confirmada')
+      INSERT INTO reserva (id_usuario, id_funcion, fecha_reserva, total, estado, cantidad)
+      VALUES (?, ?, NOW(), ?, 'confirmada', ?)
     `;
+
     if (!id_usuario) {
-    return res.status(400).json({ error: "Debes iniciar sesión para reservar." });
+      return res.status(400).json({ error: "Debes iniciar sesión para reservar." });
     }
-    db.query(sqlReserva, [id_usuario, id_funcion, total], (err2, result) => {
-      if (err2) return res.status(500).json({ error: "Error creando reserva." });
+
+    db.query(sqlReserva, [id_usuario, id_funcion, total, cantidad], (err2, result) => {
+      if (err2) {
+        console.error("❌ ERROR EN sqlReserva:", err2.sqlMessage);
+        return res.status(500).json({ error: err2.sqlMessage });
+      }
 
       const sqlUpdate = `
         UPDATE funcion
@@ -47,11 +57,15 @@ export const crearReserva = (req, res) => {
       `;
 
       db.query(sqlUpdate, [cantidad, id_funcion], (err3) => {
-        if (err3) return res.status(500).json({ error: "Error actualizando asientos." });
+        if (err3) {
+          console.error("❌ ERROR EN sqlUpdate:", err3.sqlMessage);
+          return res.status(500).json({ error: err3.sqlMessage });
+        }
 
         res.json({
           success: true,
           reserva_id: result.insertId,
+          id_sala,
           total,
           mensaje: "Reserva creada exitosamente."
         });

@@ -42,16 +42,6 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/asientos"
-          element={
-            <ProtectedRoute>
-              <h1>Reserva de Asientos</h1>
-              <SalaSelector selectedSala={sala} onChange={setSala} />
-              <SeatGrid idSala={sala} />
-            </ProtectedRoute>
-          }
-        />
 
         {/* Opcional: solo admin */}
         <Route path="/dashboard" element={<Dashboard />} />
@@ -63,7 +53,14 @@ export default function App() {
         <Route path="/verify-pin" element={<VerifyPin />} />
         {/* Ruta para restablecer contraseña */}
         <Route path="/reset-password" element={<ResetPassword />} />
-
+        <Route
+          path="/asientos/:idSala/:cantidad"
+          element={
+            <ProtectedRoute>
+              <SeatGrid />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

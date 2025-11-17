@@ -5,6 +5,7 @@ export const getFunciones = (req, res) => {
         SELECT 
             f.id_funcion, 
             p.titulo, 
+            f.id_sala,
             f.fecha, 
             f.hora
         FROM funcion f
