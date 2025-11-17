@@ -17,6 +17,7 @@ import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/AdminDashboard";
 import SalaSelector from "./pages/SalaSelector";   //Selector de sala
 import SeatGrid from "./pages/SeatGrid";           //Grid de asientos
+import EstadoReservas from "./pages/EstadoReservas";
 
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* 🔒 Páginas protegidas */}
+        {/* Páginas protegidas (requieren login) */}
         <Route
           path="/reservas"
           element={
@@ -42,7 +43,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/asientos"
           element={
@@ -62,18 +62,25 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/estado-reservas"
+          element={
+            <ProtectedRoute>
+              <EstadoReservas />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Opcional: solo admin */}
+        {/* Opcional: solo admin (puedes protegerlo luego si quieres) */}
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* Ruta por defecto */}
-        <Route path="*" element={<Home />} />
-        {/* Ruta para recuperar contraseña */}
+
+        {/* Recuperar contraseña */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        {/* Ruta para verificar pin */}
         <Route path="/verify-pin" element={<VerifyPin />} />
-        {/* Ruta para restablecer contraseña */}
         <Route path="/reset-password" element={<ResetPassword />} />
 
+        {/* Ruta por defecto */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );

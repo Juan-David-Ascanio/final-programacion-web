@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../components/auth";
 import "./../css/Header.css";
-import { FaUser } from "react-icons/fa"; //Importa el ícono que va junto a "Mi cuenta" se instala con npm install react-icons
-
+import { FaUser } from "react-icons/fa"; // Ícono junto a "Mi cuenta"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,35 +22,72 @@ export default function Header() {
 
   return (
     <header className="navbar">
-      <div className="nav-inner container-wide">
-
+      <div className="nav-inner">
+        {/* Marca / logo */}
         <NavLink to="/" className="brand" onClick={closeMenu}>
-          <img src="/img/logo.png" alt="Cine Reservas" className="brand-logo" />
+          <img
+            src="/img/logo.png"
+            alt="Cine Reservas"
+            className="brand-logo"
+          />
           <span className="brand-text">Cine Reservas</span>
         </NavLink>
 
-        <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={toggleMenu}>
-          <div></div><div></div><div></div>
+        {/* Botón hamburguesa (mobile) */}
+        <div
+          className={`hamburger ${isOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
 
+        {/* Links de navegación */}
         <nav className={`nav-links ${isOpen ? "open" : ""}`}>
-          <NavLink to="/" end onClick={closeMenu}>Inicio</NavLink>
-          <NavLink to="/peliculas" onClick={closeMenu}>Películas</NavLink>
-          <NavLink to="/reservas" onClick={closeMenu}>Reservar</NavLink>
-          <NavLink to="/contacto" onClick={closeMenu}>Contacto</NavLink>
+          <NavLink to="/" end onClick={closeMenu}>
+            Inicio
+          </NavLink>
 
-          <span className="grow" />
+          <NavLink to="/peliculas" onClick={closeMenu}>
+            Cartelera
+          </NavLink>
 
+          <NavLink to="/reservas" onClick={closeMenu}>
+            Reservar
+          </NavLink>
+
+          {/* 🔹 NUEVO LINK: Estado de reservas */}
+          <NavLink to="/estado-reservas" onClick={closeMenu}>
+            Mis reservas
+          </NavLink>
+
+          <NavLink to="/contacto" onClick={closeMenu}>
+            Contacto
+          </NavLink>
+
+          {/* Zona derecha: login / cuenta */}
           {isLogged ? (
             <>
               <NavLink to="/dashboard" onClick={closeMenu}>
-              <FaUser /> Mi Cuenta
+                <FaUser /> Mi Cuenta
               </NavLink>
+              <button
+                type="button"
+                className="logout-btn"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" onClick={closeMenu}>Login</NavLink>
-              <NavLink to="/register" onClick={closeMenu}>Crear cuenta</NavLink>
+              <NavLink to="/login" onClick={closeMenu}>
+                Login
+              </NavLink>
+                <NavLink to="/register" onClick={closeMenu}>
+                Crear cuenta
+              </NavLink>
             </>
           )}
         </nav>
