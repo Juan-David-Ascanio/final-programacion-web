@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
+
 import "./../css/Reservas.css"
 
 export default function Reservas() {
   const [mensaje, setMensaje] = useState('');
   const [funciones, setFunciones] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3001/api/funciones")
@@ -14,44 +17,54 @@ export default function Reservas() {
 
   // Enviar reserva al backend
   async function handleSubmit(e) {
-    e.preventDefault();
-    const form = new FormData(e.target);
+  e.preventDefault();
+  const form = new FormData(e.target);
 
-    const id_funcion = form.get("pelicula");
-    const cantidad = parseInt(form.get("cantidad"), 10);
-    const nombre = form.get("nombre");
+  const id_funcion = form.get("pelicula");
+  const cantidad = parseInt(form.get("cantidad"), 10);
+  const nombre = form.get("nombre");
 
-    const user = JSON.parse(localStorage.getItem("cine_user"));
-    const id_usuario = user ? user.id_usuario : null;
+  const user = JSON.parse(localStorage.getItem("cine_user"));
+  const id_usuario = user ? user.id_usuario : null;
 
-    const reservaData = {
-      id_usuario,
-      id_funcion,
-      cantidad
-    };
+  // 👉 OBTENER ID DE LA SALA
+  const funcionSeleccionada = funciones.find(f => f.id_funcion == id_funcion);
+  const id_sala = funcionSeleccionada?.id_sala;
 
-    try {
-      const res = await fetch("http://localhost:3001/api/reservas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(reservaData)
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMensaje("❌ " + data.error);
-        return;
-      }
-
-      setMensaje(`✔️ Reserva confirmada para ${nombre} — ${cantidad} boleto(s).`);
-
-      e.target.reset();
-    } catch (error) {
-      console.error("Error reservando:", error);
-      setMensaje("❌ Error al crear la reserva.");
-    }
+  if (!id_sala) {
+    setMensaje("❌ Error: la función seleccionada no tiene sala asignada.");
+    return;
   }
+
+  const reservaData = {
+    id_usuario,
+    id_funcion,
+    cantidad
+  };
+
+  try {
+    const res = await fetch("http://localhost:3001/api/reservas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reservaData)
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMensaje("❌ " + data.error);
+      return;
+    }
+
+    setMensaje(`✔️ Reserva confirmada para ${nombre} — ${cantidad} boleto(s).`);
+    navigate(`/asientos/${data.id_sala}/${cantidad}`);
+    e.target.reset();
+
+  } catch (error) {
+    console.error("Error reservando:", error);
+    setMensaje("❌ Error al crear la reserva.");
+  }
+}
 
   return (
     <>

@@ -3,21 +3,16 @@ import db from "../db/connection.js";
 
 // === PÚBLICO: lista de funciones (solo para mostrar) ===
 export const getFunciones = (req, res) => {
-  const sql = `
-    SELECT 
-      f.id_funcion,
-      f.id_pelicula,
-      p.titulo,
-      f.id_sala,
-      s.nombre,
-      f.fecha,
-      f.hora,
-      f.precio,
-      f.asientos_disponibles
-    FROM funcion f
-    INNER JOIN pelicula p ON f.id_pelicula = p.id_pelicula
-    INNER JOIN salas s ON f.id_sala = s.id_sala
-  `;
+    const sql = `
+        SELECT 
+            f.id_funcion, 
+            p.titulo, 
+            f.id_sala,
+            f.fecha, 
+            f.hora
+        FROM funcion f
+        INNER JOIN pelicula p ON f.id_pelicula = p.id_pelicula
+    `;
 
   db.query(sql, (err, results) => {
     if (err) {

@@ -43,16 +43,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/asientos"
-          element={
-            <ProtectedRoute>
-              <h1>Reserva de Asientos</h1>
-              <SalaSelector selectedSala={sala} onChange={setSala} />
-              <SeatGrid idSala={sala} />
-            </ProtectedRoute>
-          }
-        />
 
         <Route
           path="/admin"
@@ -81,6 +71,15 @@ export default function App() {
 
         {/* Ruta por defecto */}
         <Route path="*" element={<Home />} />
+        
+        <Route
+          path="/asientos/:idSala/:cantidad"
+          element={
+            <ProtectedRoute>
+              <SeatGrid />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
