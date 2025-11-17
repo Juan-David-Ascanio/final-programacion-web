@@ -25,6 +25,16 @@ export default function Dashboard() {
           Rol: <span className="user-role">{user.rol}</span>
         </p>
 
+        {/* BOTÓN SOLO PARA ADMINISTRADOR */}
+        {user.rol === "administrador" && (
+          <button
+            className="dashboard-btn"
+            onClick={() => navigate("/admin")}
+          >
+            Panel administrativo
+          </button>
+        )}
+
         <button
           className="logout-btn"
           onClick={() => {

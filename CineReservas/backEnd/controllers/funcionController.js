@@ -9,14 +9,14 @@ export const getFunciones = (req, res) => {
       f.id_pelicula,
       p.titulo,
       f.id_sala,
-      s.nombre_sala,
+      s.nombre,
       f.fecha,
       f.hora,
       f.precio,
       f.asientos_disponibles
     FROM funcion f
     INNER JOIN pelicula p ON f.id_pelicula = p.id_pelicula
-    INNER JOIN sala s ON f.id_sala = s.id_sala
+    INNER JOIN salas s ON f.id_sala = s.id_sala
   `;
 
   db.query(sql, (err, results) => {
@@ -36,14 +36,14 @@ export const getFuncionesAdmin = (req, res) => {
       f.id_pelicula,
       p.titulo,
       f.id_sala,
-      s.nombre_sala,
+      s.nombre,
       f.fecha,
       f.hora,
       f.precio,
       f.asientos_disponibles
     FROM funcion f
     INNER JOIN pelicula p ON f.id_pelicula = p.id_pelicula
-    INNER JOIN sala s ON f.id_sala = s.id_sala
+    INNER JOIN salas s ON f.id_sala = s.id_sala
     ORDER BY f.fecha, f.hora
   `;
 

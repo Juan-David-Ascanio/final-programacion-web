@@ -88,3 +88,30 @@
         font-size: 1.8em;
     }
 }
+
+/* ===== BOTÓN ADMIN (PANEL ADMINISTRATIVO) ===== */
+.dashboard-btn {
+    margin-top: 35px!important;
+    padding: 12px 20px;
+    background-color: #3fa9f5; /* azul elegante */
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    width: 90%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.dashboard-btn:hover {
+    background-color: #1083cf;
+    transform: translateY(-2px);
+}
+
+.dashboard-card button {
+    display: block;
+    width: 70%;          /* Ajusta el tamaño: 50%–80% se ve muy bien */
+    max-width: 250px;    /* Limita el tamaño para que no crezcan demasiado */
+    margin: 12px auto;   /* auto centra el botón horizontalmente */
+}
