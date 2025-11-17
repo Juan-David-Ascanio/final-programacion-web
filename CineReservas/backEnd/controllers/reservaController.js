@@ -106,14 +106,14 @@ export const obtenerReservasPorUsuario = (req, res) => {
       p.titulo,
       p.img,
       u.nombre AS nombre_usuario,
-      GROUP_CONCAT(a.numero_asiento ORDER BY a.numero_asiento SEPARATOR ', ') AS asientos
+      GROUP_CONCAT(a.seat_number ORDER BY a.seat_number SEPARATOR ', ') AS asientos
     FROM reserva r
     INNER JOIN funcion f   ON r.id_funcion = f.id_funcion
     INNER JOIN pelicula p  ON f.id_pelicula = p.id_pelicula
     INNER JOIN usuario u   ON r.id_usuario = u.id_usuario
     LEFT JOIN reserva_asiento ra ON r.id_reserva = ra.id_reserva
-    LEFT JOIN asiento a         ON ra.id_asiento = a.id_asiento
-    WHERE r.id_usuario = ?
+    LEFT JOIN seats a         ON ra.id_asiento = a.id
+    WHERE r.id_usuario = 18
     GROUP BY
       r.id_reserva,
       r.fecha_reserva,

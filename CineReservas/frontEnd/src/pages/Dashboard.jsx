@@ -35,6 +35,16 @@ export default function Dashboard() {
           </button>
         )}
 
+        {/* BOTÓN SOLO PARA CLIENTE */}
+        {user.rol === "cliente" && (
+          <button
+            className="dashboard-btn"
+            onClick={() => navigate("/estado-reservas")}
+          >
+            Ver mis reservas
+          </button>
+        )}
+
         <button
           className="logout-btn"
           onClick={() => {
