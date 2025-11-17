@@ -1,12 +1,12 @@
 // src/App.jsx
 import React from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Peliculas from "./pages/Peliculas";
 import Reservas from "./pages/Reservas";
 import Contacto from "./pages/Contacto";
-import SeatSelection from "./pages/SeatSelection";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -14,10 +14,13 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyPin from "./pages/VerifyPin";
 import ResetPassword from "./pages/ResetPassword";
-
+import SalaSelector from "./pages/SalaSelector";   //Selector de sala
+import SeatGrid from "./pages/SeatGrid";           //Grid de asientos
 
 
 export default function App() {
+  const [sala, setSala] = useState(1);
+
   return (
     <div className="app-root">
       <Header />
@@ -43,7 +46,9 @@ export default function App() {
           path="/asientos"
           element={
             <ProtectedRoute>
-              <SeatSelection />
+              <h1>Reserva de Asientos</h1>
+              <SalaSelector selectedSala={sala} onChange={setSala} />
+              <SeatGrid idSala={sala} />
             </ProtectedRoute>
           }
         />

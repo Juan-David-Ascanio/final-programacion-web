@@ -6,6 +6,7 @@ import peliculaRoutes from "./routes/peliculaRoutes.js"; // <-- NUEVO
 import "./db/connection.js";
 import funcionRoutes from "./routes/funcionRoutes.js";
 import reservaRoutes from "./routes/reservaRoutes.js";
+import seatsRoutes from "./routes/seat.js";  //grid de asientos
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.use("/api/usuarios", userRoutes);
 app.use("/api/peliculas", peliculaRoutes); // <-- NUEVA RUTA
 app.use("/api/funciones", funcionRoutes);
 app.use("/api/reservas", reservaRoutes);
+app.use("/seats", seatsRoutes); //grid de asientos
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
