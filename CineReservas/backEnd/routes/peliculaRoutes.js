@@ -1,22 +1,26 @@
-// backEnd/routes/funcionRoutes.js
+// backEnd/routes/peliculaRoutes.js
 import express from "express";
 import {
-  getFunciones,
-  getFuncionesAdmin,
-  createFuncion,
-  updateFuncion,
-  deleteFuncion,
-} from "../controllers/funcionController.js";
+  getPeliculas,
+  getPeliculasAdmin,
+  createPelicula,
+  updatePelicula,
+  deletePelicula,
+  getTopPeliculas,
+} from "../controllers/peliculaController.js";
 
 const router = express.Router();
 
-// Público
-router.get("/", getFunciones);
+// Público (cartelera)
+router.get("/", getPeliculas);
 
-// Admin – CRUD horarios
-router.get("/admin", getFuncionesAdmin);
-router.post("/", createFuncion);
-router.put("/:id", updateFuncion);
-router.delete("/:id", deleteFuncion);
+// Admin – CRUD
+router.get("/admin", getPeliculasAdmin);
+router.post("/", createPelicula);
+router.put("/:id", updatePelicula);
+router.delete("/:id", deletePelicula); // no lo usamos desde el front, pero queda
+
+// Estadísticas
+router.get("/top", getTopPeliculas);
 
 export default router;

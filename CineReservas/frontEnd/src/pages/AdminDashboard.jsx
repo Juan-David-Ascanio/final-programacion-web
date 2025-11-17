@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../components/auth";
-import "./../css/AdminDashboard.css";   
-
+import "./../css/AdminDashboard.css";
 
 const API = "http://localhost:3001/api";
 
@@ -127,19 +126,45 @@ export default function AdminDashboard() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleDeletePelicula = async (id) => {
-    if (!window.confirm("¿Marcar esta película como inactiva?")) return;
+  // Activar / Inactivar usando PUT al mismo endpoint de actualizar
+  const handleToggleEstadoPelicula = async (pelicula) => {
+    const nuevoEstado = pelicula.estado === "activa" ? "inactiva" : "activa";
+
+    const mensajeConfirmacion =
+      nuevoEstado === "inactiva"
+        ? "¿Marcar esta película como INACTIVA? No se mostrará en cartelera."
+        : "¿Marcar esta película como ACTIVA y mostrarla de nuevo en cartelera?";
+
+    if (!window.confirm(mensajeConfirmacion)) return;
 
     try {
-      const res = await fetch(`${API}/peliculas/${id}`, {
-        method: "DELETE",
+      const payload = {
+        titulo: pelicula.titulo,
+        img: pelicula.img,
+        sinopsis: pelicula.sinopsis,
+        duracion: pelicula.duracion,
+        clasificacion: pelicula.clasificacion,
+        genero: pelicula.genero,
+        idioma: pelicula.idioma,
+        estado: nuevoEstado,
+      };
+
+      const res = await fetch(`${API}/peliculas/${pelicula.id_pelicula}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+
       const data = await res.json();
+
       if (!res.ok) {
-        setMensaje(data.error || "Error al eliminar película");
+        setMensaje(
+          data.error || "Error al cambiar el estado de la película"
+        );
         return;
       }
-      setMensaje(data.message || "Película inactivada.");
+
+      setMensaje(data.message || "Estado de la película actualizado.");
       cargarPeliculas();
     } catch (e) {
       handleError(e);
@@ -491,10 +516,14 @@ export default function AdminDashboard() {
                         Editar
                       </button>
                       <button
-                        onClick={() => handleDeletePelicula(p.id_pelicula)}
-                        className="table-btn table-btn-danger"
+                        onClick={() => handleToggleEstadoPelicula(p)}
+                        className={
+                          p.estado === "activa"
+                            ? "table-btn table-btn-danger"
+                            : "table-btn table-btn-success"
+                        }
                       >
-                        Inactivar
+                        {p.estado === "activa" ? "Inactivar" : "Activar"}
                       </button>
                     </td>
                   </tr>
@@ -565,26 +594,29 @@ export default function AdminDashboard() {
       {/* ==== ESTADÍSTICAS ==== */}
       <div className="admin-card admin-top">
         <h2>Películas más reservadas</h2>
-        <div className="top-grid">
-          {topPeliculas.map((p) => (
-            <article key={p.id_pelicula} className="top-card">
-              <div className="top-img-wrapper">
-                {p.img && (
-                  <img
-                    src={p.img}
-                    alt={p.titulo}
-                    className="top-img"
-                  />
-                )}
-              </div>
-              <h3>{p.titulo}</h3>
-              <p>{p.total_reservas} reservas</p>
-            </article>
-          ))}
-          {topPeliculas.length === 0 && (
-            <p>No hay reservas registradas aún.</p>
-          )}
-        </div>
+
+        {topPeliculas.length === 0 ? (
+          <p>No hay reservas registradas aún.</p>
+        ) : (
+          <table className="ranking-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Película</th>
+                <th>Reservas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {topPeliculas.map((p, index) => (
+                <tr key={p.id_pelicula}>
+                  <td>{index + 1}</td>
+                  <td>{p.titulo}</td>
+                  <td>{p.total_reservas}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </section>
   );
