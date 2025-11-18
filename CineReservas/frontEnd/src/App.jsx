@@ -15,9 +15,10 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyPin from "./pages/VerifyPin";
 import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/AdminDashboard";
-import SalaSelector from "./pages/SalaSelector";   //Selector de sala
+import SalaSelector from "./pages/SalaSelector";   //Selector de sala (para pruebas)
 import SeatGrid from "./pages/SeatGrid";           //Grid de asientos
 import EstadoReservas from "./pages/EstadoReservas";
+import Success from "./pages/Success";
 
 
 export default function App() {
@@ -33,6 +34,8 @@ export default function App() {
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/success" element={<Success />} />
+
 
         {/* Páginas protegidas (requieren login) */}
         <Route

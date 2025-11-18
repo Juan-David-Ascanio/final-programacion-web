@@ -8,10 +8,7 @@ import db from "../db/connection.js";
  * - Actualiza los asientos disponibles de la función
  */
 export const crearReserva = (req, res) => {
-<<<<<<< HEAD
-=======
   console.log("📩 LLEGÓ UNA RESERVA:", req.body);
->>>>>>> origin/cristian-dev
   const { id_usuario, id_funcion, cantidad } = req.body;
 
   if (!id_funcion || !cantidad) {
@@ -26,13 +23,8 @@ export const crearReserva = (req, res) => {
 
   db.query(sqlCheck, [id_funcion], (err, results) => {
     if (err) {
-<<<<<<< HEAD
-      console.error("Error verificando función:", err);
-      return res.status(500).json({ error: "Error en la base de datos." });
-=======
       console.error("❌ ERROR EN sqlCheck:", err.sqlMessage);
       return res.status(500).json({ error: err.sqlMessage });
->>>>>>> origin/cristian-dev
     }
 
     if (results.length === 0) {
@@ -59,18 +51,8 @@ export const crearReserva = (req, res) => {
 
     // OJO: aquí uso 'confirmado' como en el ENUM de la BD
     const sqlReserva = `
-<<<<<<< HEAD
-      INSERT INTO reserva (id_usuario, id_funcion, fecha_reserva, total, estado)
-      VALUES (?, ?, NOW(), ?, 'confirmado')
-    `;
-
-    db.query(sqlReserva, [id_usuario, id_funcion, total], (err2, result) => {
-      if (err2) {
-        console.error("Error creando reserva:", err2);
-        return res.status(500).json({ error: "Error creando reserva." });
-=======
       INSERT INTO reserva (id_usuario, id_funcion, fecha_reserva, total, estado, cantidad)
-      VALUES (?, ?, NOW(), ?, 'confirmada', ?)
+      VALUES (?, ?, NOW(), ?, 'confirmado', ?)
     `;
 
     if (!id_usuario) {
@@ -81,7 +63,6 @@ export const crearReserva = (req, res) => {
       if (err2) {
         console.error("❌ ERROR EN sqlReserva:", err2.sqlMessage);
         return res.status(500).json({ error: err2.sqlMessage });
->>>>>>> origin/cristian-dev
       }
 
       const sqlUpdate = `
@@ -137,7 +118,7 @@ export const obtenerReservasPorUsuario = (req, res) => {
     INNER JOIN usuario u   ON r.id_usuario = u.id_usuario
     LEFT JOIN reserva_asiento ra ON r.id_reserva = ra.id_reserva
     LEFT JOIN seats a         ON ra.id_asiento = a.id
-    WHERE r.id_usuario = 18
+    WHERE r.id_usuario = ?
     GROUP BY
       r.id_reserva,
       r.fecha_reserva,
@@ -173,14 +154,14 @@ export const obtenerReservasPorUsuario = (req, res) => {
         id_reserva: row.id_reserva,
         fecha_reserva: row.fecha_reserva,
         total,
-        estado: row.estado,            // 'pendiente', 'confirmado', 'cancelada'
+        estado: row.estado,
         fecha_funcion: row.fecha_funcion,
         hora: row.hora_funcion,
         titulo: row.titulo,
         img: row.img,
         nombre_usuario: row.nombre_usuario,
-        cantidad,                      // cantidad de boletos aprox.
-        asientos: row.asientos,        // ej: "A1, A2, B3" o null
+        cantidad,
+        asientos: row.asientos,
       };
     });
 

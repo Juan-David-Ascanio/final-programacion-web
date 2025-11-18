@@ -12,7 +12,6 @@ export default function Home() {
 
           <div className="hero-buttons">
             <Link to="/peliculas" className="btn">🎟 Ver Cartelera</Link>
-            <Link to="/asientos" className="btn btn-secondary">💺 Seleccionar Asientos</Link>
           </div>
         </div>
       </section>
