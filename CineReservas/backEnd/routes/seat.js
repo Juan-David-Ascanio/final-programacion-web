@@ -3,6 +3,18 @@ import { db } from "../db.js";
 
 const router = express.Router();
 
+// Obtener cantidad de asientos disponibles en una sala
+router.get("/available/:id_sala", async (req, res) => {
+  const { id_sala } = req.params;
+
+  const [result] = await db.query(
+    "SELECT COUNT(*) AS disponibles FROM seats WHERE id_sala = ? AND reserved = 0",
+    [id_sala]
+  );
+
+  res.json({ disponibles: result[0].disponibles });
+});
+
 // Obtener asientos por sala
 router.get("/:id_sala", async (req, res) => {
   const { id_sala } = req.params;
@@ -34,18 +46,5 @@ router.post("/reserve/:id", async (req, res) => {
 
   res.json({ message: "Asiento reservado correctamente" });
 });
-
-// Obtener cantidad de asientos disponibles en una sala
-router.get("/available/:id_sala", async (req, res) => {
-  const { id_sala } = req.params;
-
-  const [result] = await db.query(
-    "SELECT COUNT(*) AS disponibles FROM seats WHERE id_sala = ? AND reserved = 0",
-    [id_sala]
-  );
-
-  res.json({ disponibles: result[0].disponibles });
-});
-
 
 export default router;

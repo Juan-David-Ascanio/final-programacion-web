@@ -23,7 +23,6 @@ const emptyFuncion = {
   fecha: "",
   hora: "",
   precio: "",
-  asientos_disponibles: "",
 };
 
 export default function AdminDashboard() {
@@ -40,6 +39,35 @@ export default function AdminDashboard() {
 
   const [topPeliculas, setTopPeliculas] = useState([]);
   const [mensaje, setMensaje] = useState("");
+
+  const [asientosSala, setAsientosSala] = useState("");
+
+
+  // Para ver asientos disponibles dinámicamente
+    useEffect(() => {
+    if (!funcionForm.id_sala) {
+      setAsientosSala("");
+      return;
+    }
+
+    const fetchAsientos = async () => {
+      try {
+        const res = await fetch(`http://localhost:3001/api/asientos/available/${funcionForm.id_sala}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          setAsientosSala(data.disponibles);
+        } else {
+          setAsientosSala(""); // sala no encontrada
+        }
+      } catch (error) {
+        setAsientosSala("");
+      }
+    };
+
+    fetchAsientos();
+  }, [funcionForm.id_sala]);
+
 
   // Protección extra en el front
   useEffect(() => {
@@ -203,14 +231,13 @@ export default function AdminDashboard() {
         : `${API}/funciones`;
 
       const payload = {
-        ...funcionForm,
         id_pelicula: Number(funcionForm.id_pelicula),
         id_sala: Number(funcionForm.id_sala),
+        fecha: funcionForm.fecha,
+        hora: funcionForm.hora,
         precio: Number(funcionForm.precio),
-        asientos_disponibles: funcionForm.asientos_disponibles
-          ? Number(funcionForm.asientos_disponibles)
-          : null,
       };
+
 
       const res = await fetch(url, {
         method,
@@ -241,7 +268,6 @@ export default function AdminDashboard() {
       fecha: f.fecha?.slice(0, 10) || "",
       hora: f.hora || "",
       precio: f.precio || "",
-      asientos_disponibles: f.asientos_disponibles || "",
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -462,14 +488,14 @@ export default function AdminDashboard() {
               </label>
 
               <label>
-                Asientos disp.
+                Asientos disponibles
                 <input
-                  type="number"
-                  name="asientos_disponibles"
-                  value={funcionForm.asientos_disponibles}
-                  onChange={handleChangeFuncion}
+                  type="text"
+                  value={asientosSala}
+                  readOnly
                 />
               </label>
+              
             </div>
 
             <div className="admin-buttons">

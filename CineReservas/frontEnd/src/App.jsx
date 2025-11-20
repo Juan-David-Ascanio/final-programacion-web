@@ -1,6 +1,5 @@
 // src/App.jsx
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -20,9 +19,14 @@ import SeatGrid from "./pages/SeatGrid";           //Grid de asientos
 import EstadoReservas from "./pages/EstadoReservas";
 import Success from "./pages/Success";
 
+import { auth } from "./components/auth"; //Para el cierre de sesión automática
 
 export default function App() {
-  const [sala, setSala] = useState(1);
+
+  //Funcionalidad que hace que la sesión se cierre automáticamente por inactividad
+    useEffect(() => {
+      auth.initAutoLogout(); // activa
+    }, []);
 
   return (
     <div className="app-root">

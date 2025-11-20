@@ -55,8 +55,7 @@ export const getFuncionesAdmin = (req, res) => {
 
 // === ADMIN: crear función (horario) ===
 export const createFuncion = (req, res) => {
-  const { id_pelicula, id_sala, fecha, hora, precio, asientos_disponibles } =
-    req.body;
+  const { id_pelicula, id_sala, fecha, hora, precio } = req.body;
 
   if (!id_pelicula || !id_sala || !fecha || !hora || !precio) {
     return res
@@ -64,35 +63,52 @@ export const createFuncion = (req, res) => {
       .json({ error: "Faltan datos obligatorios para la función." });
   }
 
-  const sql = `
-    INSERT INTO funcion (id_pelicula, id_sala, fecha, hora, precio, asientos_disponibles)
-    VALUES (?, ?, ?, ?, ?, ?)
+  // 1️⃣ Consultar asientos disponibles desde tabla seats
+  const sqlCountSeats = `
+    SELECT COUNT(*) AS disponibles
+    FROM seats
+    WHERE id_sala = ? AND reserved = 0
   `;
 
-  const values = [
-    id_pelicula,
-    id_sala,
-    fecha,
-    hora,
-    precio,
-    asientos_disponibles || null,
-  ];
-
-  db.query(sql, values, (err, result) => {
+  db.query(sqlCountSeats, [id_sala], (err, seatsResult) => {
     if (err) {
-      console.error("Error en createFuncion:", err);
-      return res
-        .status(500)
-        .json({ error: "Error al crear la función" });
+      console.error("Error en sqlCountSeats:", err);
+      return res.status(500).json({ error: "Error obteniendo asientos disponibles" });
     }
 
-    res.json({
-      success: true,
-      id_funcion: result.insertId,
-      message: "Función creada correctamente",
+    const asientos_disponibles = seatsResult[0].disponibles;
+
+    // 2️⃣ Crear la función usando el valor calculado
+    const sqlInsert = `
+      INSERT INTO funcion (id_pelicula, id_sala, fecha, hora, precio, asientos_disponibles)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+      id_pelicula,
+      id_sala,
+      fecha,
+      hora,
+      precio,
+      asientos_disponibles,
+    ];
+
+    db.query(sqlInsert, values, (err2, result) => {
+      if (err2) {
+        console.error("Error en createFuncion:", err2);
+        return res.status(500).json({ error: "Error al crear la función" });
+      }
+
+      res.json({
+        success: true,
+        id_funcion: result.insertId,
+        asientos_disponibles,
+        message: "Función creada correctamente",
+      });
     });
   });
 };
+
 
 // === ADMIN: actualizar función ===
 export const updateFuncion = (req, res) => {
@@ -142,20 +158,48 @@ export const updateFuncion = (req, res) => {
 export const deleteFuncion = (req, res) => {
   const { id } = req.params;
 
-  const sql = "DELETE FROM funcion WHERE id_funcion = ?";
+  // 1️⃣ Primero obtenemos la sala asociada a la función
+  const sqlGetSala = "SELECT id_sala FROM funcion WHERE id_funcion = ?";
 
-  db.query(sql, [id], (err, result) => {
+  db.query(sqlGetSala, [id], (err, result) => {
     if (err) {
-      console.error("Error en deleteFuncion:", err);
-      return res
-        .status(500)
-        .json({ error: "Error al eliminar la función" });
+      console.error("Error consultando la función:", err);
+      return res.status(500).json({ error: "Error al obtener la función" });
     }
 
-    if (result.affectedRows === 0) {
+    if (result.length === 0) {
       return res.status(404).json({ error: "Función no encontrada" });
     }
 
-    res.json({ success: true, message: "Función eliminada" });
+    const idSala = result[0].id_sala;
+
+    // 2️⃣ Eliminamos la función
+    const sqlDelete = "DELETE FROM funcion WHERE id_funcion = ?";
+
+    db.query(sqlDelete, [id], (err, deleteResult) => {
+      if (err) {
+        console.error("Error al eliminar la función:", err);
+        return res.status(500).json({ error: "Error al eliminar función" });
+      }
+
+      // 3️⃣ Liberamos los asientos de esa sala
+      const sqlUpdateSeats = `
+        UPDATE seats 
+        SET reserved = 0 
+        WHERE id_sala = ?
+      `;
+
+      db.query(sqlUpdateSeats, [idSala], (err, updateResult) => {
+        if (err) {
+          console.error("Error liberando asientos:", err);
+          return res.status(500).json({ error: "Error al liberar asientos" });
+        }
+
+        res.json({
+          success: true,
+          message: "Función eliminada y asientos liberados",
+        });
+      });
+    });
   });
 };
