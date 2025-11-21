@@ -44,7 +44,7 @@ export default function ResetPassword() {
         setError(data.error || "Error al cambiar la contraseña");
       } else {
         setMensaje("Contraseña actualizada correctamente");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/login"), 5000);
       }
     } catch (err) {
       setError("Error de conexión con el servidor");

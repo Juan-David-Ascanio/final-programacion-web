@@ -11,11 +11,11 @@ export default function Success() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setFadeOut(true); // comenzamos animación de salida
-    }, 2500); // empieza fade-out a los 2.5 segundos
+    }, 4500); // empieza fade-out a los 2.5 segundos
 
     const redirectTimer = setTimeout(() => {
       navigate("/");
-    }, 3500); // redirección suave después del fade-out
+    }, 5000); // redirección suave después del fade-out
 
     return () => {
       clearTimeout(timer);

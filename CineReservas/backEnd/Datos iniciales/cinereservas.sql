@@ -558,24 +558,25 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `contrasena` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `rol` enum('cliente','administrador') COLLATE utf8_spanish_ci DEFAULT 'cliente',
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `reset_pin` varchar(6) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `reset_pin` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `reset_expiration` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Volcado de datos para la tabla `usuario` con contraseñas en bcrypt
 --
 
 INSERT IGNORE INTO `usuario` (`id_usuario`, `nombre`, `nombre_usuario`, `correo`, `contrasena`, `rol`, `telefono`, `reset_pin`, `reset_expiration`) VALUES
-(1, 'Juan Ascanio', 'juanA', 'jascanio412@gmail.com', '12345juan', 'administrador', '3001234567', '956167', '2025-11-12 21:27:09'),
-(2, 'María López', 'marial', 'maria.lopez@gmail.com', 'maria2025', 'cliente', '3019876543', NULL, NULL),
-(3, 'Carlos Pérez', 'carlosp', 'carlos.perez@gmail.com', 'car123', 'cliente', '3025551122', NULL, NULL),
-(4, 'Laura Gómez', 'laurag', 'laura.gomez@gmail.com', 'laura321', 'cliente', '3108887766', NULL, NULL),
-(5, 'Andrés Torres', 'andrest', 'andres.torres@gmail.com', 'torres555', 'cliente', '3129992233', NULL, NULL),
-(7, 'Juan José', 'Juajo', 'juan.jose@gmail.com', '12345', 'cliente', '3124578945', NULL, NULL),
-(18, 'Cristian', 'Cristian', 'cristianjacobquintero@gmail.com', 'loquesea', 'cliente', NULL, NULL, NULL),
-(20, 'Admin', 'admin', 'cinereservasoficial@gmail.com', 'admin123', 'administrador', NULL, NULL, NULL),
-(21, 'Sofía Herrera', 'sofiH', 'sofia.herrera@gmail.com', 'sofia321', 'cliente', '3009876543', NULL, NULL);
+(1, 'Juan Ascanio', 'juanA', 'jascanio412@gmail.com', '$2b$10$FDVajgC3UBy0093g7Yi3jO9y9lx5VWhQqfIEbaV1sTTnUj.65LUG6', 'administrador', '3001234567', NULL, NULL),
+(2, 'María López', 'marial', 'maria.lopez@gmail.com', '$2b$10$dXvhPALp3PTTLnVqbZXBcuArIaMbA8XWsTBiVA60x655eLVfuz/FG', 'cliente', '3019876543', NULL, NULL),
+(3, 'Carlos Pérez', 'carlosp', 'carlos.perez@gmail.com', '$2b$10$Q4Jp7nu7o469796QiBDw3elmcnMu8Pjvi8f4yMOixa8tSJHZmR7QG', 'cliente', '3025551122', NULL, NULL),
+(4, 'Laura Gómez', 'laurag', 'laura.gomez@gmail.com', '$2b$10$khIe9ERTBnBfZqme6e7GyuEmuT0I4eyRbjcb7M3NiRryTRVPoWQQm', 'cliente', '3108887766', NULL, NULL),
+(5, 'Andrés Torres', 'andrest', 'andres.torres@gmail.com', '$2b$10$jIRRsVfBfeiSndaZmNeZXO7nUC1LJqiqAKDWlSwc1uVGvDuvhW6cK', 'cliente', '3129992233', NULL, NULL),
+(7, 'Juan José', 'Juajo', 'juan.jose@gmail.com', '$2b$10$RAaOyxn/.lP3JPxmNa3FGuh6Ige1/R4j.jtGZeQnvN2BZwc4iE0ei', 'cliente', '3124578945', NULL, NULL),
+(18, 'Cristian', 'Cristian', 'cristianjacobquintero@gmail.com', '$2b$10$NNRIj28fmPw4.vVKUBa6o.exRR2S3ZkSIK96uxp88NAbKG8ecOu/O', 'cliente', NULL, NULL, NULL),
+(20, 'Admin', 'admin', 'cinereservasoficial@gmail.com', '$2b$10$y12/R9brOVs7yGYyL3pDAe4Gl0YjrA/U617VwSr1EJqGgMkngYZbK', 'administrador', NULL, NULL, NULL),
+(21, 'Sofía Herrera', 'sofiH', 'sofia.herrera@gmail.com', '$2b$10$YBrFZj5OCQyEU5H8hsK.uezujIiBdTUsRJfR6vLRsSPW0FFvKtNEi', 'cliente', '3009876543', NULL, NULL);
+
 
 --
 -- Índices para tablas volcadas

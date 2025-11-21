@@ -54,7 +54,7 @@ export default function Register() {
       if (response.status === 201 || response.status === 200) {
         setMessage("✅ Registro exitoso. Redirigiendo...");
         setMessageType("success");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/login"), 5000);
       }
     } catch (error) {
       console.error("Error al registrar:", error);
